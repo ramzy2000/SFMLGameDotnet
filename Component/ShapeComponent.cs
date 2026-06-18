@@ -19,6 +19,6 @@ public class ShapeComponent : Component
             shape.Position = transformComponent.position;
             shape.Rotation = transformComponent.rotation;
         }
-        Game.window.Draw(shape);
+         GameState.window.Draw(shape);
     }
 }

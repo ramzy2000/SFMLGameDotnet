@@ -1,32 +1,30 @@
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 public class Game
 {
-    public static RenderWindow window = new RenderWindow(SFML.Window.VideoMode.DesktopMode, "Game");
-
-    public static SystemManager systemManager = new SystemManager();
-
     public void Run()
     {
-        window.Closed += CloseWindowHandel;
-        Player player = new Player();
+        GameState.window.Closed += CloseWindowHandel;
         Clock clock = new Clock();
-        while(window.IsOpen)
+
+        GameState.LoadLevel(new MainLevel());
+        while( GameState.window.IsOpen)
         {
-            window.DispatchEvents();
+            GameState.window.DispatchEvents();
 
             float dt = clock.Restart().AsSeconds();
 
-            window.Clear(Color.Black);
+            GameState.window.Clear(Color.Black);
 
-            systemManager.Update(dt);
+            GameState.systemManager.Update(dt);
 
-            window.Display();
+            GameState.window.Display();
         }
     }
 
     public static void CloseWindowHandel(object? sender, EventArgs e)
     {
-        window.Close();
+         GameState.window.Close();
     }
 }

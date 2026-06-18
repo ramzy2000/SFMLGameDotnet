@@ -7,12 +7,17 @@ public class BaseSystem<T> where T : Component
         components.Add(component);
     }
  
-    public static void Update(float dt)
+    public async static Task Update(float dt)
     {
         foreach(T component in components)
         {
             component.Update(dt);
         }
+    }
+
+    public async static Task ClearSystem()
+    {
+        components.Clear();
     }
 }
 
