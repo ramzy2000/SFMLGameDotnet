@@ -1,3 +1,5 @@
+using SFML.Graphics;
+
 public class BaseSystem<T> where T : Component
 {
     protected static List<T> components = new List<T>();
@@ -7,7 +9,7 @@ public class BaseSystem<T> where T : Component
         components.Add(component);
     }
  
-    public async static Task Update(float dt)
+    public virtual async Task Update(float dt)
     {
         foreach(T component in components)
         {
@@ -15,15 +17,17 @@ public class BaseSystem<T> where T : Component
         }
     }
 
-    public async static Task ClearSystem()
+    public async Task ClearSystem()
     {
         components.Clear();
     }
 }
 
 public class TransformSystem : BaseSystem<TransformComponent> { }
-public class ShapeSystem : BaseSystem<ShapeComponent> { }
+public class GraphicsSystem : BaseSystem<GraphicsComponent> { }
 
-public class MovementSystem : BaseSystem<MovementComponent> { }
+public class PhysicsSystem : BaseSystem<PhysicsComponent> { }
 
-public class ControllerSystem : BaseSystem<PlayerControllerComponent> { }
+public class InputSystem : BaseSystem<InputComponent> { }
+
+public class CollisionSystem : BaseSystem<CollisionComponent> { }
