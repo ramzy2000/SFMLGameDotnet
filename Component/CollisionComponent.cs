@@ -1,14 +1,20 @@
 using SFML.Graphics;
+using SFML.System;
 
 public class CollisionComponent : Component
 {
-    public CollisionComponent()
-    {
-        CollisionSystem.Register(this);
-    }
+    public CollisoinState collisoinState = CollisoinState.none;
 
-    public override void Update(float dt)
+    public RectangleShape collisionBody;
+
+    public TransformComponent transformComponent;
+    public CollisionComponent(TransformComponent transformComponent, Vector2f size)
     {
-         
+        collisionBody = new RectangleShape();
+        this.transformComponent = transformComponent;
+        this.collisionBody.Size = size;
+        this.collisionBody.FillColor = Color.Transparent;
+        this.collisionBody.Position = transformComponent.position;
+        CollisionSystem.Register(this);
     }
 }

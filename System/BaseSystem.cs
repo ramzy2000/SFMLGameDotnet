@@ -26,8 +26,6 @@ public class BaseSystem<T> where T : Component
 public class TransformSystem : BaseSystem<TransformComponent> { }
 public class GraphicsSystem : BaseSystem<GraphicsComponent> { }
 
-public class PhysicsSystem : BaseSystem<PhysicsComponent> { }
-
 public class InputSystem : BaseSystem<InputComponent> { }
 
 public class CollisionSystem : BaseSystem<CollisionComponent> { }
