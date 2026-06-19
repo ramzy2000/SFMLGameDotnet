@@ -3,11 +3,14 @@ public class SystemManager
     public static InputSystem inputSystem = new InputSystem();
     public static TransformSystem transformSystem = new TransformSystem();
     public static GraphicsSystem graphicsSystem = new GraphicsSystem();
-    public void Update(float dt)
+
+    public static PhysicsSystem physicsSystem = new PhysicsSystem();
+    public async Task Update(float dt)
     {
-        Task.WaitAll(inputSystem.Update(dt), 
-                     transformSystem.Update(dt),
-                     graphicsSystem.Update(dt));
+        await inputSystem.Update(dt);
+        await physicsSystem.Update(dt);
+        await transformSystem.Update(dt);
+        await graphicsSystem.Update(dt);
     }
 
     public void ClearSystems()

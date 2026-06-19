@@ -9,11 +9,11 @@ public class InputComponent : Component
 
     public int walkAcceleration = 1;
 
-    public TransformComponent transformComponent;
+    public RidgetBodyComponent ridgetBodyComponent;
 
-    public InputComponent(TransformComponent transformComponent)
+    public InputComponent(RidgetBodyComponent ridgetBodyComponent)
     {
-        this.transformComponent = transformComponent;
+        this.ridgetBodyComponent = ridgetBodyComponent;
         InputSystem.Register(this);
     }
 
@@ -41,6 +41,6 @@ public class InputComponent : Component
         }
 
         // update the transform component
-        transformComponent.position = transformComponent.position + direction * speed * dt;
+        ridgetBodyComponent.rigidBody.ApplyForce(direction * speed, dt);
     }
 }

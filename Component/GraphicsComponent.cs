@@ -10,16 +10,14 @@ public class GraphicsComponent : Component
     {
         this.shape = shape;
         this.transformComponent = transformComponent;
+        shape.Position = transformComponent.position;
         GraphicsSystem.Register(this);
     }
 
     public override void Update(float dt)
     {
-        if(transformComponent != null && shape != null)
-        {
-            shape.Position = transformComponent.position;
-            shape.Rotation = transformComponent.rotation;
-        }
+        shape.Position = transformComponent.position;
+        shape.Rotation = transformComponent.rotation;
         GameState.window.Draw(shape);
     }
 }

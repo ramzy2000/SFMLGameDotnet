@@ -6,6 +6,7 @@ public class Wall : Entity
     public Wall()
     {
         TransformComponent transformComponent = new TransformComponent();
+        transformComponent.position = new Vector2f(0, 500);
         AddComponent(transformComponent);
 
         RectangleShape rectangleShape = new RectangleShape(new Vector2f(300f, 50f));
@@ -13,7 +14,7 @@ public class Wall : Entity
         GraphicsComponent graphicsComponent = new GraphicsComponent(rectangleShape, transformComponent);
         AddComponent(graphicsComponent);
 
-        CollisionComponent collisionComponent = new CollisionComponent(transformComponent, new Vector2f(300f, 50f));
-        AddComponent(collisionComponent);
+        RidgetBodyComponent ridgetBodyComponent = new RidgetBodyComponent(new RigidBody(rectangleShape.Position, 0.5f, 0), transformComponent);
+        AddComponent(ridgetBodyComponent);
     }
 }

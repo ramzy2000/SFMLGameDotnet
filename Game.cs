@@ -9,7 +9,7 @@ public class Game
         Clock clock = new Clock();
 
         GameState.LoadLevel(new MainLevel());
-        while( GameState.window.IsOpen)
+        while(GameState.window.IsOpen)
         {
             GameState.window.DispatchEvents();
 
@@ -17,7 +17,7 @@ public class Game
 
             GameState.window.Clear(Color.Black);
 
-            GameState.systemManager.Update(dt);
+            GameState.systemManager.Update(dt).Wait();
 
             GameState.window.Display();
         }
