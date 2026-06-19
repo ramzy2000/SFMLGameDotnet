@@ -6,6 +6,12 @@ public class PhysicsSystem : BaseSystem<RidgetBodyComponent>
 
     public override async Task Update(float dt)
     {
+        // Transform is authoritative for placement. Sync body positions before collision checks.
+        foreach(RidgetBodyComponent component in components)
+        {
+            component.rigidBody.Position = component.transformComponent.position;
+        }
+
         foreach(RidgetBodyComponent component in components)
         {
             if(component.rigidBody.InvMass > 0)

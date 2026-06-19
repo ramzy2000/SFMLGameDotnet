@@ -7,12 +7,10 @@ public class MainLevel : Level
         AddEntity(new Player());
 
         Wall wall = new Wall();
-
         TransformComponent? transformComponent = wall.GetComponent<TransformComponent>();
         if(transformComponent != null)
         {
-            transformComponent.position.X = 400;
-            transformComponent.position.Y = 400;
+            transformComponent.position = new Vector2f(0.0f, 400.0f);
         }
         AddEntity(wall);
     }

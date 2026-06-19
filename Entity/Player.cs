@@ -6,18 +6,19 @@ public class Player : Entity
     public Player()
     {
         TransformComponent transformComponent = new TransformComponent();
-        transformComponent.position = new Vector2f(0.01f, 0.0f);
+        transformComponent.position = new Vector2f(0.0f, 0.0f);
         AddComponent(transformComponent);
-        CircleShape circleShape = new CircleShape(50.5f);
+        CircleShape circleShape = new CircleShape(50.0f);
+        circleShape.Origin = new Vector2f(circleShape.Radius, circleShape.Radius);
         circleShape.FillColor = Color.Blue;
         GraphicsComponent graphicsComponent = new GraphicsComponent(circleShape, transformComponent);
         AddComponent(graphicsComponent);
 
-        RidgetBodyComponent ridgetBodyComponent = new RidgetBodyComponent(new RigidBody(circleShape.Position, circleShape.Radius, 1), transformComponent);
+        RidgetBodyComponent ridgetBodyComponent = new RidgetBodyComponent(new RigidBody(transformComponent.position, circleShape.Radius, 1), transformComponent);
         AddComponent(ridgetBodyComponent);
 
         InputComponent inputComponent = new InputComponent(ridgetBodyComponent);
-        inputComponent.speed = 100f;
+        inputComponent.speed = 1000f;
         AddComponent(inputComponent);
     }
 }

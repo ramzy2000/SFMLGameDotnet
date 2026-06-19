@@ -6,15 +6,15 @@ public class Wall : Entity
     public Wall()
     {
         TransformComponent transformComponent = new TransformComponent();
-        transformComponent.position = new Vector2f(0, 500);
+        transformComponent.position = new Vector2f(0.0f, 0.0f);
         AddComponent(transformComponent);
-
-        RectangleShape rectangleShape = new RectangleShape(new Vector2f(300f, 50f));
-        rectangleShape.FillColor = Color.Red;
-        GraphicsComponent graphicsComponent = new GraphicsComponent(rectangleShape, transformComponent);
+        CircleShape circleShape = new CircleShape(100.0f);
+        circleShape.Origin = new Vector2f(circleShape.Radius, circleShape.Radius);
+        circleShape.FillColor = Color.Red;
+        GraphicsComponent graphicsComponent = new GraphicsComponent(circleShape, transformComponent);
         AddComponent(graphicsComponent);
 
-        RidgetBodyComponent ridgetBodyComponent = new RidgetBodyComponent(new RigidBody(rectangleShape.Position, 0.5f, 0), transformComponent);
+        RidgetBodyComponent ridgetBodyComponent = new RidgetBodyComponent(new RigidBody(transformComponent.position, circleShape.Radius, 0), transformComponent);
         AddComponent(ridgetBodyComponent);
     }
 }
