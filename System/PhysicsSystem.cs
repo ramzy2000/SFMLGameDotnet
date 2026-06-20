@@ -7,11 +7,13 @@ public class PhysicsSystem : BaseSystem<RidgetBodyComponent>
     public override async Task Update(float dt)
     {
         // Transform is authoritative for placement. Sync body positions before collision checks.
+        // Update the rigid body position to match the transform components position
         foreach(RidgetBodyComponent component in components)
         {
             component.rigidBody.Position = component.transformComponent.position;
         }
 
+        // apply the forces of gravity to each Rigid body component
         foreach(RidgetBodyComponent component in components)
         {
             if(component.rigidBody.InvMass > 0)
@@ -20,6 +22,7 @@ public class PhysicsSystem : BaseSystem<RidgetBodyComponent>
             }
         }
 
+        // apply collisions on each ridged body component
         for(int i = 0; i < components.Count(); i++)
         {
             for(int j = i + 1; j < components.Count(); j++)
@@ -38,6 +41,7 @@ public class PhysicsSystem : BaseSystem<RidgetBodyComponent>
 
     private void ResolveCollision(RigidBody a, RigidBody b)
     {
+        
         Vector2f direction = b.Position - a.Position;
         float distanceSq = direction.X * direction.X + direction.Y * direction.Y;
         float radiusSum = a.Radius + b.Radius;

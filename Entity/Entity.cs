@@ -21,4 +21,10 @@ public class Entity
         }
         return null;
     }
+
+    ~Entity()
+    {
+        // remove all of this entitys components from the systems.
+        // maybe come up with a way to manage the entities in the systems better.
+    }
 }
