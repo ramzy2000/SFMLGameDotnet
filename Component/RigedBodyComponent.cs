@@ -13,6 +13,11 @@ public class RidgetBodyComponent : Component
         PhysicsSystem.Register(this);
     }
 
+    public override void Destory()
+    {
+        PhysicsSystem.Remove(this);
+    }
+
     public override void Update(float dt)
     {
         rigidBody.Update(dt);

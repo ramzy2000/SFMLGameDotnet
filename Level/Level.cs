@@ -7,13 +7,10 @@ public class Level
         entities.Add(entity);
     }
 
-    public virtual void Load()
+    public virtual void RemoveEntity(Entity entity)
     {
-        
-    }
-
-    public virtual void Unload()
-    {
-        GameState.systemManager.ClearSystems();
+        if(!entities.Contains(entity)) return;
+        entity.DestoryAllComponents();
+        entities.Remove(entity);
     }
 }

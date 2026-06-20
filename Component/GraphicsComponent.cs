@@ -14,6 +14,11 @@ public class GraphicsComponent : Component
         GraphicsSystem.Register(this);
     }
 
+    public override void Destory()
+    {
+        GraphicsSystem.Remove(this);
+    }
+
     public override void Update(float dt)
     {
         shape.Position = transformComponent.position;

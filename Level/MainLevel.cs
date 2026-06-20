@@ -2,9 +2,15 @@ using SFML.System;
 
 public class MainLevel : Level
 {
+    public Player? player;
     public MainLevel()
     {
-        AddEntity(new Player());
+        player = new Player();;
+        if(player != null)
+        {
+            AddEntity(player);
+        }
+        
 
         Wall wall = new Wall();
         TransformComponent? transformComponent = wall.GetComponent<TransformComponent>();

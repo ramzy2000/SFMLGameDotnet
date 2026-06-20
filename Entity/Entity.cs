@@ -22,9 +22,18 @@ public class Entity
         return null;
     }
 
-    ~Entity()
+    public void DestoryComponent(Component component)
     {
-        // remove all of this entitys components from the systems.
-        // maybe come up with a way to manage the entities in the systems better.
+        component.Destory();
+        components.Remove(component);
+    }
+
+    public void DestoryAllComponents()
+    {
+        foreach(Component component in components)
+        {
+            component.Destory();
+        }
+        components.Clear();
     }
 }
