@@ -18,10 +18,9 @@ public class TransformComponent : Component
 
     public override void Update(float dt)
     {
-        CameraComponent? cameraComponent = entity.GetComponent<CameraComponent>();
-        if(cameraComponent != null)
+        if(CameraComponent.isActive)
         {
-            position += cameraComponent.transform;
+            position += CameraComponent.transform;
         }
     }
 

@@ -3,6 +3,7 @@ using SFML.System;
 using SFML.Window;
 public class Game
 {
+    private const float TargetAspectRatio = 16f / 9f;
     public void Run()
     {
         GameState.window.Closed += CloseWindowHandel;

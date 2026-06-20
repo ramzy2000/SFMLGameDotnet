@@ -4,11 +4,17 @@ public class CameraComponent : Component
 {
     public TransformComponent transformComponent;
     
-    public Vector2f transform;
+    public static Vector2f transform;
+
+    public static bool isActive = false;
     public CameraComponent(TransformComponent transformComponent)
     {
         this.transformComponent = transformComponent;
-        transform = transformComponent.position + (Vector2f)GameState.window.Size / 2;
+        // get the distance between the current transform and the center of the screen
+        Vector2f centerPos = (Vector2f)GameState.window.Size / 2;
+
+        transform = (centerPos - transformComponent.position);
+        isActive = true;
         CameraSystem.Register(this);
     }
 
@@ -22,10 +28,6 @@ public class CameraComponent : Component
         // get the distance between the current transform and the center of the screen
         Vector2f centerPos = (Vector2f)GameState.window.Size / 2;
 
-        float distance = Utils.GetDistance(centerPos, transformComponent.position);
-
-        Vector2f direction = transformComponent.position - centerPos;
-        
-        transform = direction * distance;
+        transform = (centerPos - transformComponent.position);
     }
 }
