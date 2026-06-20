@@ -24,7 +24,7 @@ public class Entity
 
     public void DestoryComponent(Component component)
     {
-        component.Destory();
+        component.Destroy();
         components.Remove(component);
     }
 
@@ -32,7 +32,7 @@ public class Entity
     {
         foreach(Component component in components)
         {
-            component.Destory();
+            component.Destroy();
         }
         components.Clear();
     }

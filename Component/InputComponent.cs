@@ -17,7 +17,7 @@ public class InputComponent : Component
         InputSystem.Register(this);
     }
 
-    public override void Destory()
+    public override void Destroy()
     {
         InputSystem.Remove(this);
     }

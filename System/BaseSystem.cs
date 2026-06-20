@@ -33,3 +33,4 @@ public class TransformSystem : BaseSystem<TransformComponent> { }
 public class GraphicsSystem : BaseSystem<GraphicsComponent> { }
 
 public class InputSystem : BaseSystem<InputComponent> { }
+

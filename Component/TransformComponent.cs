@@ -16,7 +16,7 @@ public class TransformComponent : Component
         TransformSystem.Register(this);
     }
 
-    public override void Destory()
+    public override void Destroy()
     {
         TransformSystem.Remove(this);
     }

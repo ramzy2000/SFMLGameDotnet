@@ -13,11 +13,25 @@ public class MainLevel : Level
         
 
         Wall wall = new Wall();
-        TransformComponent? transformComponent = wall.GetComponent<TransformComponent>();
-        if(transformComponent != null)
         {
-            transformComponent.position = new Vector2f(0.0f, 400.0f);
+            TransformComponent? transformComponent = wall.GetComponent<TransformComponent>();
+            if(transformComponent != null)
+            {
+                transformComponent.position = new Vector2f(300.0f, 400.0f);
+            }
         }
+        
         AddEntity(wall);
+        
+        PickUpEntity pickUpEntity = new PickUpEntity();
+        {
+            TransformComponent? transformComponent = pickUpEntity.GetComponent<TransformComponent>();
+            if(transformComponent != null)
+            {
+                transformComponent.position = new Vector2f(600.0f, 400.0f);
+            }
+        }
+        
+        AddEntity(pickUpEntity);
     }
 }

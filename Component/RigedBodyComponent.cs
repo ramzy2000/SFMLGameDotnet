@@ -6,6 +6,12 @@ public class RidgetBodyComponent : Component
 
     public TransformComponent transformComponent;
 
+    public CollisoinState collisoinState = CollisoinState.ridgedBody;
+
+    public List<RidgetBodyComponent> overlapList = new List<RidgetBodyComponent>();
+
+    public List<RidgetBodyComponent> collisionList = new List<RidgetBodyComponent>();
+
     public RidgetBodyComponent(RigidBody rigidBody, TransformComponent transformComponent)
     {
         this.transformComponent = transformComponent;
@@ -13,7 +19,7 @@ public class RidgetBodyComponent : Component
         PhysicsSystem.Register(this);
     }
 
-    public override void Destory()
+    public override void Destroy()
     {
         PhysicsSystem.Remove(this);
     }
