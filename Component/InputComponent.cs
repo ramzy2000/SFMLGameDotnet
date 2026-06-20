@@ -17,6 +17,11 @@ public class InputComponent : Component
         InputSystem.Register(this);
     }
 
+    public override void Destory()
+    {
+        InputSystem.Remove(this);
+    }
+
     public override void Update(float dt)
     {
         direction = new Vector2f(0f, 0f);

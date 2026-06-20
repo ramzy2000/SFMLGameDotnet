@@ -21,4 +21,19 @@ public class Entity
         }
         return null;
     }
+
+    public void DestoryComponent(Component component)
+    {
+        component.Destory();
+        components.Remove(component);
+    }
+
+    public void DestoryAllComponents()
+    {
+        foreach(Component component in components)
+        {
+            component.Destory();
+        }
+        components.Clear();
+    }
 }

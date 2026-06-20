@@ -11,12 +11,4 @@ public class GameState
     {
         currentLevel = level;
     }
-
-    public static void UnloadLevel()
-    {
-        if(currentLevel != null)
-        {
-            currentLevel.Unload();
-        }
-    }
 }

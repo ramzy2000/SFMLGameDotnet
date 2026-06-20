@@ -15,4 +15,9 @@ public class TransformComponent : Component
     {
         TransformSystem.Register(this);
     }
+
+    public override void Destory()
+    {
+        TransformSystem.Remove(this);
+    }
 }

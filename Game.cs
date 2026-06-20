@@ -7,8 +7,8 @@ public class Game
     {
         GameState.window.Closed += CloseWindowHandel;
         Clock clock = new Clock();
-
-        GameState.LoadLevel(new MainLevel());
+        MainLevel mainLevel = new MainLevel();
+        GameState.LoadLevel(mainLevel);
         while(GameState.window.IsOpen)
         {
             GameState.window.DispatchEvents();
@@ -16,7 +16,6 @@ public class Game
             float dt = clock.Restart().AsSeconds();
 
             GameState.window.Clear(Color.Black);
-
             GameState.systemManager.Update(dt).Wait();
 
             GameState.window.Display();
