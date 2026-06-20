@@ -16,6 +16,15 @@ public class TransformComponent : Component
         TransformSystem.Register(this);
     }
 
+    public override void Update(float dt)
+    {
+        CameraComponent? cameraComponent = entity.GetComponent<CameraComponent>();
+        if(cameraComponent != null)
+        {
+            position += cameraComponent.transform;
+        }
+    }
+
     public override void Destroy()
     {
         TransformSystem.Remove(this);

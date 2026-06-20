@@ -7,10 +7,13 @@ public class SystemManager
     public static PhysicsSystem physicsSystem = new PhysicsSystem();
 
     public static PickUpSystem pickUpSystem = new PickUpSystem();
+
+    public static CameraSystem cameraSystem = new CameraSystem();
     public async Task Update(float dt)
     {
         await inputSystem.Update(dt);
         await physicsSystem.Update(dt);
+        await cameraSystem.Update(dt);
         await transformSystem.Update(dt);
         await pickUpSystem.Update(dt);
         await graphicsSystem.Update(dt);
