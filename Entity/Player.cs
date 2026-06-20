@@ -19,5 +19,8 @@ public class Player : Entity
         InputComponent inputComponent = new InputComponent(ridgetBodyComponent);
         inputComponent.speed = 1000f;
         AddComponent(inputComponent);
+
+        CameraComponent cameraComponent = new CameraComponent(transformComponent);
+        AddComponent(cameraComponent);
     }
 }
