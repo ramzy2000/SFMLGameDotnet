@@ -5,5 +5,7 @@ public class Component
     public Entity entity;
     public virtual void Update(float dt) { }
 
+    public virtual void Init() {}
+
     public virtual void Destory() { }
 }
