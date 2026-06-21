@@ -7,6 +7,8 @@ public class GameState
 
     public static Level? currentLevel = null;
 
+    public static float dt;
+
     public static void LoadLevel(Level level)
     {
         currentLevel = level;

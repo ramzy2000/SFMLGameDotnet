@@ -13,7 +13,7 @@ public class Game
         {
             GameState.window.DispatchEvents();
 
-            float dt = clock.Restart().AsSeconds();
+            GameState.dt = clock.Restart().AsSeconds();
 
             GameState.window.Clear(Color.Black);
             GameState.systemManager.Update(dt).Wait();
