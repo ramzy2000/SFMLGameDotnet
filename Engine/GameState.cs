@@ -3,7 +3,7 @@ public class GameState
 {
     public static RenderWindow window = new RenderWindow(SFML.Window.VideoMode.DesktopMode, "Game");
 
-    public static SystemManager systemManager = new SystemManager();
+    public static World world = new World();
 
     public static Level? currentLevel = null;
 
@@ -11,6 +11,8 @@ public class GameState
 
     public static void LoadLevel(Level level)
     {
+        world.Reset();
         currentLevel = level;
+        currentLevel.Load(world);
     }
 }

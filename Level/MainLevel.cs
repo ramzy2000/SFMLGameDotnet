@@ -2,36 +2,10 @@ using SFML.System;
 
 public class MainLevel : Level
 {
-    public Player? player;
-    public MainLevel()
+    public override void Load(World world)
     {
-        player = new Player();;
-        if(player != null)
-        {
-            AddEntity(player);
-        }
-        
-
-        Wall wall = new Wall();
-        {
-            TransformComponent? transformComponent = wall.GetComponent<TransformComponent>();
-            if(transformComponent != null)
-            {
-                transformComponent.position = new Vector2f(300.0f, 400.0f);
-            }
-        }
-        
-        AddEntity(wall);
-        
-        PickUpEntity pickUpEntity = new PickUpEntity();
-        {
-            TransformComponent? transformComponent = pickUpEntity.GetComponent<TransformComponent>();
-            if(transformComponent != null)
-            {
-                transformComponent.position = new Vector2f(600.0f, 400.0f);
-            }
-        }
-        
-        AddEntity(pickUpEntity);
+        Player.Create(world, new Vector2f(400, 300));
+        Wall.Create(world, new Vector2f(400, 500), 35f);
+        PickUpEntity.Create(world, new Vector2f(500, 350));
     }
 }

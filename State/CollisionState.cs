@@ -1,7 +1,7 @@
 
-public enum CollisoinState
+public enum CollisionState
 {
-    none = 0,
-    ridgedBody,
-    staticBody,
+    None = 0,
+    RigidBody,
+    StaticBody,
 }

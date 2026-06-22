@@ -1,36 +1,47 @@
 using SFML.Graphics;
 using SFML.System;
 
-public class BaseSystem<T> where T : Component
+public abstract class BaseSystem
 {
-    protected static List<T> components = new List<T>();
+    public abstract void Update(World world, float dt);
+}
 
-    public static void Register(T component)
+public class GraphicsSystem : BaseSystem
+{
+    public override void Update(World world, float dt)
     {
-        components.Add(component);
-    }
-
-    public static void Remove(T component)
-    {
-        components.Remove(component);
-    }
- 
-    public virtual async Task Update(float dt)
-    {
-        foreach(T component in components)
+        foreach (ArchetypeChunk chunk in world.Query(typeof(TransformComponent), typeof(GraphicsComponent)))
         {
-            component.Update(dt);
-        }
-    }
+            TransformComponent[] transforms = chunk.GetComponentArray<TransformComponent>();
+            GraphicsComponent[] graphicsComponents = chunk.GetComponentArray<GraphicsComponent>();
 
-    public async Task ClearSystem()
-    {
-        components.Clear();
+            for (int index = 0; index < chunk.Count; index++)
+            {
+                GraphicsComponent graphics = graphicsComponents[index];
+                TransformComponent transform = transforms[index];
+
+                graphics.shape.Position = transform.position + CameraSystem.Offset;
+                graphics.shape.Rotation = transform.rotation;
+                GameState.window.Draw(graphics.shape);
+            }
+        }
     }
 }
 
-public class TransformSystem : BaseSystem<TransformComponent> { }
-public class GraphicsSystem : BaseSystem<GraphicsComponent> { }
+public class InputSystem : BaseSystem
+{
+    public override void Update(World world, float dt)
+    {
+        foreach (ArchetypeChunk chunk in world.Query(typeof(InputComponent)))
+        {
+            InputComponent[] inputs = chunk.GetComponentArray<InputComponent>();
 
-public class InputSystem : BaseSystem<InputComponent> { }
+            for (int index = 0; index < chunk.Count; index++)
+            {
+                InputComponent input = inputs[index];
+                input.CaptureInput();
+            }
+        }
+    }
+}
 

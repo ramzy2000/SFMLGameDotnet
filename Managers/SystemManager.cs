@@ -1,28 +1,25 @@
 public class SystemManager
 {
-    public static InputSystem inputSystem = new InputSystem();
-    public static TransformSystem transformSystem = new TransformSystem();
-    public static GraphicsSystem graphicsSystem = new GraphicsSystem();
+    private readonly List<BaseSystem> _systems = new();
 
-    public static PhysicsSystem physicsSystem = new PhysicsSystem();
-
-    public static PickUpSystem pickUpSystem = new PickUpSystem();
-
-    public static CameraSystem cameraSystem = new CameraSystem();
-    public async Task Update(float dt)
+    public SystemManager()
     {
-        await inputSystem.Update(dt);
-        await physicsSystem.Update(dt);
-        await cameraSystem.Update(dt);
-        await transformSystem.Update(dt);
-        await pickUpSystem.Update(dt);
-        await graphicsSystem.Update(dt);
+        _systems.Add(new InputSystem());
+        _systems.Add(new PhysicsSystem());
+        _systems.Add(new CameraSystem());
+        _systems.Add(new GraphicsSystem());
+    }
+
+    public void Update(World world, float dt)
+    {
+        foreach (BaseSystem system in _systems)
+        {
+            system.Update(world, dt);
+        }
     }
 
     public void ClearSystems()
     {
-       Task.WaitAll(inputSystem.ClearSystem(), 
-                     transformSystem.ClearSystem(),
-                     graphicsSystem.ClearSystem());
+        _systems.Clear();
     }
 }

@@ -1,15 +1,30 @@
 using SFML.System;
 
-public class CameraSystem : BaseSystem<CameraComponent>
+public class CameraSystem : BaseSystem
 {
-    public override async Task Update(float dt)
+    public static Vector2f Offset { get; private set; }
+
+    public override void Update(World world, float dt)
     {
-        // update every transform to keep the current transform in the center of the screen
-        // get the center of the screen
-        // get the get the vector to move transform to center of screen
-        foreach(CameraComponent cameraComponent in components)
+        Vector2f centerPos = (Vector2f)GameState.window.Size / 2;
+        Offset = new Vector2f(0f, 0f);
+
+        foreach (ArchetypeChunk chunk in world.Query(typeof(CameraComponent), typeof(TransformComponent)))
         {
-            cameraComponent.Update(dt);
+            CameraComponent[] cameras = chunk.GetComponentArray<CameraComponent>();
+            TransformComponent[] transforms = chunk.GetComponentArray<TransformComponent>();
+
+            for (int index = 0; index < chunk.Count; index++)
+            {
+                CameraComponent camera = cameras[index];
+                if (!camera.isActive)
+                {
+                    continue;
+                }
+
+                Offset = centerPos - transforms[index].position;
+                return;
+            }
         }
     }
 }

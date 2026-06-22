@@ -1,7 +1,8 @@
 ﻿public class Program
 {
-    public static async Task Main(string[] args)
+    public static void Main(string[] args)
     {
+        GameState.LoadLevel(new MainLevel());
         Game game = new Game();
         game.Run();
     }

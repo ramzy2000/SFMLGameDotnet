@@ -1,19 +1,25 @@
 using SFML.Graphics;
 using SFML.System;
 
-public class Wall : Entity
+public static class Wall
 {
-    public Wall()
+    public static Entity Create(World world, Vector2f position, float radius = 30f)
     {
-        TransformComponent transformComponent = new TransformComponent();
-        AddComponent(transformComponent);
-        CircleShape circleShape = new CircleShape(100.0f);
-        circleShape.Origin = new Vector2f(circleShape.Radius, circleShape.Radius);
-        circleShape.FillColor = Color.Red;
-        GraphicsComponent graphicsComponent = new GraphicsComponent(circleShape, transformComponent);
-        AddComponent(graphicsComponent);
-
-        RidgetBodyComponent ridgetBodyComponent = new RidgetBodyComponent(new RigidBody(transformComponent.position, circleShape.Radius, 0), transformComponent);
-        AddComponent(ridgetBodyComponent);
+        return world.CreateEntity(
+            new TransformComponent
+        {
+            position = position,
+            scale = new Vector2f(1f, 1f),
+            rotation = 0f
+        },
+            new GraphicsComponent(new CircleShape(radius)
+        {
+            Origin = new Vector2f(radius, radius),
+            FillColor = Color.White
+        }),
+            new RidgetBodyComponent(new RigidBody(position, radius, 0f, 0.2f))
+        {
+            collisionState = CollisionState.StaticBody
+        });
     }
 }

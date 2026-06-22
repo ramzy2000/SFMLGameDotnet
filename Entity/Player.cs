@@ -1,26 +1,31 @@
 using SFML.Graphics;
 using SFML.System;
 
-public class Player : Entity
+public static class Player
 {
-    public Player()
+    public static Entity Create(World world, Vector2f position)
     {
-        TransformComponent transformComponent = new TransformComponent();
-        AddComponent(transformComponent);
-        CircleShape circleShape = new CircleShape(50.0f);
-        circleShape.Origin = new Vector2f(circleShape.Radius, circleShape.Radius);
-        circleShape.FillColor = Color.Blue;
-        GraphicsComponent graphicsComponent = new GraphicsComponent(circleShape, transformComponent);
-        AddComponent(graphicsComponent);
-
-        RidgetBodyComponent ridgetBodyComponent = new RidgetBodyComponent(new RigidBody(transformComponent.position, circleShape.Radius, 1), transformComponent);
-        AddComponent(ridgetBodyComponent);
-
-        InputComponent inputComponent = new InputComponent(ridgetBodyComponent);
-        inputComponent.speed = 1000f;
-        AddComponent(inputComponent);
-
-        CameraComponent cameraComponent = new CameraComponent(transformComponent);
-        AddComponent(cameraComponent);
+        return world.CreateEntity(
+            new TransformComponent
+        {
+            position = position,
+            scale = new Vector2f(1f, 1f),
+            rotation = 0f
+        },
+            new GraphicsComponent(new CircleShape(20f)
+        {
+            Origin = new Vector2f(20f, 20f),
+            FillColor = Color.Cyan
+        }),
+            new RidgetBodyComponent(new RigidBody(position, 20f, 1f, 0.25f, 5.0f))
+        {
+            collisionState = CollisionState.RigidBody
+        },
+            new InputComponent
+        {
+            speed = 2200f,
+            walkAcceleration = 1
+        },
+            new CameraComponent(true));
     }
 }

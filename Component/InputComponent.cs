@@ -9,20 +9,7 @@ public class InputComponent : Component
 
     public int walkAcceleration = 1;
 
-    public RidgetBodyComponent ridgetBodyComponent;
-
-    public InputComponent(RidgetBodyComponent ridgetBodyComponent)
-    {
-        this.ridgetBodyComponent = ridgetBodyComponent;
-        InputSystem.Register(this);
-    }
-
-    public override void Destroy()
-    {
-        InputSystem.Remove(this);
-    }
-
-    public override void Update(float dt)
+    public Vector2f ReadMoveDirection()
     {
         direction = new Vector2f(0f, 0f);
         if (Keyboard.IsKeyPressed(Keyboard.Key.W))
@@ -45,7 +32,19 @@ public class InputComponent : Component
             direction.X += walkAcceleration;
         }
 
-        // update the transform component
-        ridgetBodyComponent.rigidBody.ApplyForce(direction * speed, dt);
+        return direction;
+    }
+
+    public void CaptureInput()
+    {
+        Vector2f moveDirection = ReadMoveDirection();
+        if (moveDirection.X == 0f && moveDirection.Y == 0f)
+        {
+            direction = moveDirection;
+            return;
+        }
+
+        float length = MathF.Sqrt((moveDirection.X * moveDirection.X) + (moveDirection.Y * moveDirection.Y));
+        direction = moveDirection / length;
     }
 }
